@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenid.org/schemas/v1.1.1/authorities.json",
+  "title": "AgenID authorities.json (v1.1.1 \u00a79.5)",
+  "description": "Authority registry served at https://agenid.org/.well-known/agenid/authorities.json. Maps authority identifiers to their domain and root key. Verifiers MUST pin the AgenID root authority public key out-of-band (published in the spec repository) and MUST treat disagreement between the pinned key and this document as trust_anchor_mismatch.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "authorities"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://agenid.org/schemas/v1.1.1/authorities.json"
+    },
+    "authorities": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "authority_id",
+          "authority_domain",
+          "root_key_id",
+          "root_public_key_b64u"
+        ],
+        "properties": {
+          "authority_id": {
+            "type": "string",
+            "pattern": "^agenid:authority:[a-z0-9][a-z0-9-]{0,62}$"
+          },
+          "authority_domain": {
+            "type": "string",
+            "format": "hostname"
+          },
+          "root_key_id": {
+            "type": "string",
+            "pattern": "^agenid:key:[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+          },
+          "root_public_key_b64u": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          }
+        }
+      }
+    }
+  }
+}

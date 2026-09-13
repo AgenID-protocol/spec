@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenid.org/schemas/v1.1.1/assertion.json",
+  "title": "AgenID VerificationAssertion (v1.1.1 \u00a76.3)",
+  "description": "Authority-signed attestation over one claim, one evidence pointer, one level, one scope, one validity window, bound to one manifest version by digest. Same signing construction as ManifestProof. L5_CONTINUOUSLY_MONITORED is intentionally absent from `level` \u2014 it is a reserved name and MUST NOT be issued in v1.1.1. Cross-field rules: subject matches subject_type (agenid:<ULID> for agent, dep_* for deployment); subject_type=deployment iff level=L4_DEPLOYMENT_VERIFIED; claim.type corresponds to level (L1\u2192registration, L2\u2192domain_control, L3\u2192organization_identity, L4\u2192deployment_conformance); expires_at > verified_at; key_id resolves to role=authority with controller == authority. evidence.reference is a POINTER, never content.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "assertion_id",
+    "subject",
+    "subject_type",
+    "level",
+    "claim",
+    "authority",
+    "evidence",
+    "verified_at",
+    "expires_at",
+    "scope",
+    "manifest_digest",
+    "key_id",
+    "signature"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://agenid.org/schemas/v1.1.1/assertion.json"
+    },
+    "assertion_id": {
+      "type": "string",
+      "pattern": "^assertion:[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject_type": {
+      "enum": [
+        "agent",
+        "deployment"
+      ]
+    },
+    "level": {
+      "enum": [
+        "L1_REGISTERED",
+        "L2_DOMAIN_VERIFIED",
+        "L3_ORGANIZATION_VERIFIED",
+        "L4_DEPLOYMENT_VERIFIED"
+      ]
+    },
+    "claim": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "const": "registration"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "domain"
+          ],
+          "properties": {
+            "type": {
+              "const": "domain_control"
+            },
+            "domain": {
+              "type": "string",
+              "format": "hostname"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "legal_name"
+          ],
+          "properties": {
+            "type": {
+              "const": "organization_identity"
+            },
+            "legal_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 300
+            },
+            "jurisdiction": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 64
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "deployment_id"
+          ],
+          "properties": {
+            "type": {
+              "const": "deployment_conformance"
+            },
+            "deployment_id": {
+              "type": "string",
+              "pattern": "^dep_[A-Za-z0-9_-]{1,64}$"
+            }
+          }
+        }
+      ]
+    },
+    "authority": {
+      "type": "string",
+      "pattern": "^agenid:authority:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "reference"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "schema_validation",
+            "dns_txt_challenge",
+            "http_wellknown_challenge",
+            "business_registry_match",
+            "document_review",
+            "deployment_sample_review"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    },
+    "verified_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?Z$"
+    },
+    "expires_at": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,9})?Z$"
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "manifest_digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alg",
+        "value"
+      ],
+      "properties": {
+        "alg": {
+          "const": "sha-256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "key_id": {
+      "type": "string",
+      "pattern": "^agenid:key:[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_-]{86}$"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "subject_type": {
+            "const": "agent"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "subject": {
+            "pattern": "^agenid:[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+          },
+          "level": {
+            "enum": [
+              "L1_REGISTERED",
+              "L2_DOMAIN_VERIFIED",
+              "L3_ORGANIZATION_VERIFIED"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "subject_type": {
+            "const": "deployment"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "subject": {
+            "pattern": "^dep_[A-Za-z0-9_-]{1,64}$"
+          },
+          "level": {
+            "const": "L4_DEPLOYMENT_VERIFIED"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "L1_REGISTERED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim": {
+            "properties": {
+              "type": {
+                "const": "registration"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "L2_DOMAIN_VERIFIED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim": {
+            "properties": {
+              "type": {
+                "const": "domain_control"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "L3_ORGANIZATION_VERIFIED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim": {
+            "properties": {
+              "type": {
+                "const": "organization_identity"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "level": {
+            "const": "L4_DEPLOYMENT_VERIFIED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "claim": {
+            "properties": {
+              "type": {
+                "const": "deployment_conformance"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "operator_key": {
+    "seed_label": "AgenID v1.1.1 operator test key seed",
+    "private_hex": "eb775bd120e9b13accc73ce6c869f88c2e03beb327be2c2582be031a27297c0d",
+    "public_hex": "0b65c2690e35219a05ba6fb83db349d5a5027af499c02952ce3c99fb1f394f78",
+    "public_b64u": "C2XCaQ41IZoFum-4PbNJ1aUCevSZwClSzjyZ-x85T3g",
+    "key_id": "agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE"
+  },
+  "authority_key": {
+    "seed_label": "AgenID v1.1.1 authority test key seed",
+    "private_hex": "68ab5520f6de62c073760132437f8b6f3e841ad69bc742f18795d235c022b21b",
+    "public_hex": "806b130924dbb3096bd974ae6d99d14b218cf57e291ffa62373553674ae64fe0",
+    "public_b64u": "gGsTCSTbswlr2XSubZnRSyGM9X4pH_piNzVTZ0rmT-A",
+    "key_id": "agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB"
+  },
+  "manifest": {
+    "input": {
+      "manifest_version": "1.0",
+      "agent_id": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
+      "identity": {
+        "name": "Sarah",
+        "description": "Inbound appointment scheduling assistant"
+      },
+      "ownership": {
+        "operator": "Acme Medical LLC",
+        "operator_domain": "acmemedical.com",
+        "contact": "trust@acmemedical.com"
+      },
+      "purpose": {
+        "summary": "Schedules and reschedules patient appointments by phone and SMS",
+        "channels": [
+          "voice",
+          "sms"
+        ]
+      },
+      "disclosure": {
+        "is_ai": true,
+        "discloses_to_user": true,
+        "human_escalation": true
+      }
+    },
+    "canonical_utf8": "{\"agent_id\":\"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y\",\"disclosure\":{\"discloses_to_user\":true,\"human_escalation\":true,\"is_ai\":true},\"identity\":{\"description\":\"Inbound appointment scheduling assistant\",\"name\":\"Sarah\"},\"manifest_version\":\"1.0\",\"ownership\":{\"contact\":\"trust@acmemedical.com\",\"operator\":\"Acme Medical LLC\",\"operator_domain\":\"acmemedical.com\"},\"purpose\":{\"channels\":[\"voice\",\"sms\"],\"summary\":\"Schedules and reschedules patient appointments by phone and SMS\"}}",
+    "canonical_hex": "7b226167656e745f6964223a226167656e69643a30314a385a334b334632515a3958365637523454384e32573559222c22646973636c6f73757265223a7b22646973636c6f7365735f746f5f75736572223a747275652c2268756d616e5f657363616c6174696f6e223a747275652c2269735f6169223a747275657d2c226964656e74697479223a7b226465736372697074696f6e223a22496e626f756e64206170706f696e746d656e74207363686564756c696e6720617373697374616e74222c226e616d65223a225361726168227d2c226d616e69666573745f76657273696f6e223a22312e30222c226f776e657273686970223a7b22636f6e74616374223a2274727573744061636d656d65646963616c2e636f6d222c226f70657261746f72223a2241636d65204d65646963616c204c4c43222c226f70657261746f725f646f6d61696e223a2261636d656d65646963616c2e636f6d227d2c22707572706f7365223a7b226368616e6e656c73223a5b22766f696365222c22736d73225d2c2273756d6d617279223a225363686564756c657320616e642072657363686564756c65732070617469656e74206170706f696e746d656e74732062792070686f6e6520616e6420534d53227d7d",
+    "sha256": "81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"
+  },
+  "manifest_proof": {
+    "payload_input": {
+      "$schema": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+      "proof_type": "manifest_self_declaration",
+      "agent_id": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
+      "manifest_version": "1.0",
+      "manifest_digest": {
+        "alg": "sha-256",
+        "value": "81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"
+      },
+      "key_id": "agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE",
+      "created_at": "2026-09-13T00:00:00Z",
+      "expires_at": "2026-12-12T00:00:00Z"
+    },
+    "signing_input_utf8": "{\"$schema\":\"https://agenid.org/schemas/v1.1.1/manifest-proof.json\",\"agent_id\":\"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y\",\"created_at\":\"2026-09-13T00:00:00Z\",\"expires_at\":\"2026-12-12T00:00:00Z\",\"key_id\":\"agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE\",\"manifest_digest\":{\"alg\":\"sha-256\",\"value\":\"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d\"},\"manifest_version\":\"1.0\",\"proof_type\":\"manifest_self_declaration\"}",
+    "signing_input_hex": "7b2224736368656d61223a2268747470733a2f2f6167656e69642e6f72672f736368656d61732f76312e312e312f6d616e69666573742d70726f6f662e6a736f6e222c226167656e745f6964223a226167656e69643a30314a385a334b334632515a3958365637523454384e32573559222c22637265617465645f6174223a22323032362d30392d31335430303a30303a30305a222c22657870697265735f6174223a22323032362d31322d31325430303a30303a30305a222c226b65795f6964223a226167656e69643a6b65793a30314a385a334d395134584b32503756424e3654445238485745222c226d616e69666573745f646967657374223a7b22616c67223a227368612d323536222c2276616c7565223a2238316261323638303136353935333733613132303931353938343033656231643039396232313466616564303466646162623562646234376234373361623564227d2c226d616e69666573745f76657273696f6e223a22312e30222c2270726f6f665f74797065223a226d616e69666573745f73656c665f6465636c61726174696f6e227d",
+    "signature_hex": "f1b9a81101db1d327d2ef0921b5682cd02013e8314e543c7592c1a85eda916c16253aa193e079e60eb383634e0ce588662d0e4e2796f4bfe39fb03095806260c",
+    "signature_b64u": "8bmoEQHbHTJ9LvCSG1aCzQIBPoMU5UPHWSwahe2pFsFiU6oZPgeeYOs4NjTgzliGYtDk4nlvS_45-wMJWAYmDA",
+    "signed_object": {
+      "$schema": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+      "proof_type": "manifest_self_declaration",
+      "agent_id": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
+      "manifest_version": "1.0",
+      "manifest_digest": {
+        "alg": "sha-256",
+        "value": "81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"
+      },
+      "key_id": "agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE",
+      "created_at": "2026-09-13T00:00:00Z",
+      "expires_at": "2026-12-12T00:00:00Z",
+      "signature": "8bmoEQHbHTJ9LvCSG1aCzQIBPoMU5UPHWSwahe2pFsFiU6oZPgeeYOs4NjTgzliGYtDk4nlvS_45-wMJWAYmDA"
+    }
+  },
+  "verification_assertion": {
+    "payload_input": {
+      "$schema": "https://agenid.org/schemas/v1.1.1/assertion.json",
+      "assertion_id": "assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC",
+      "subject": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
+      "subject_type": "agent",
+      "level": "L2_DOMAIN_VERIFIED",
+      "claim": {
+        "type": "domain_control",
+        "domain": "acmemedical.com"
+      },
+      "authority": "agenid:authority:node-01",
+      "evidence": {
+        "type": "dns_txt_challenge",
+        "reference": "_agenid-challenge.acmemedical.com"
+      },
+      "verified_at": "2026-09-13T06:00:00Z",
+      "expires_at": "2026-10-13T06:00:00Z",
+      "scope": "domain_control_only",
+      "manifest_digest": {
+        "alg": "sha-256",
+        "value": "81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"
+      },
+      "key_id": "agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB"
+    },
+    "signing_input_utf8": "{\"$schema\":\"https://agenid.org/schemas/v1.1.1/assertion.json\",\"assertion_id\":\"assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC\",\"authority\":\"agenid:authority:node-01\",\"claim\":{\"domain\":\"acmemedical.com\",\"type\":\"domain_control\"},\"evidence\":{\"reference\":\"_agenid-challenge.acmemedical.com\",\"type\":\"dns_txt_challenge\"},\"expires_at\":\"2026-10-13T06:00:00Z\",\"key_id\":\"agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB\",\"level\":\"L2_DOMAIN_VERIFIED\",\"manifest_digest\":{\"alg\":\"sha-256\",\"value\":\"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d\"},\"scope\":\"domain_control_only\",\"subject\":\"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y\",\"subject_type\":\"agent\",\"verified_at\":\"2026-09-13T06:00:00Z\"}",
+    "signing_input_hex": "7b2224736368656d61223a2268747470733a2f2f6167656e69642e6f72672f736368656d61732f76312e312e312f617373657274696f6e2e6a736f6e222c22617373657274696f6e5f6964223a22617373657274696f6e3a30314a385a3350324b38565734524e37585451364d5944354843222c22617574686f72697479223a226167656e69643a617574686f726974793a6e6f64652d3031222c22636c61696d223a7b22646f6d61696e223a2261636d656d65646963616c2e636f6d222c2274797065223a22646f6d61696e5f636f6e74726f6c227d2c2265766964656e6365223a7b227265666572656e6365223a225f6167656e69642d6368616c6c656e67652e61636d656d65646963616c2e636f6d222c2274797065223a22646e735f7478745f6368616c6c656e6765227d2c22657870697265735f6174223a22323032362d31302d31335430363a30303a30305a222c226b65795f6964223a226167656e69643a6b65793a30314a385a334e4335523759543357394b4d32585134564a4842222c226c6576656c223a224c325f444f4d41494e5f5645524946494544222c226d616e69666573745f646967657374223a7b22616c67223a227368612d323536222c2276616c7565223a2238316261323638303136353935333733613132303931353938343033656231643039396232313466616564303466646162623562646234376234373361623564227d2c2273636f7065223a22646f6d61696e5f636f6e74726f6c5f6f6e6c79222c227375626a656374223a226167656e69643a30314a385a334b334632515a3958365637523454384e32573559222c227375626a6563745f74797065223a226167656e74222c2276657269666965645f6174223a22323032362d30392d31335430363a30303a30305a227d",
+    "signature_hex": "80a0e77a3d1df3fc68fb5b82d0ebeb26394b5faae854a21096cd283d2e1802862b8bf15d2b644927bc02dd979b5f0fe825265fba593c6ed5d3995c55f871230e",
+    "signature_b64u": "gKDnej0d8_xo-1uC0OvrJjlLX6roVKIQls0oPS4YAoYri_FdK2RJJ7wC3ZebXw_oJSZfulk8btXTmVxV-HEjDg",
+    "signed_object": {
+      "$schema": "https://agenid.org/schemas/v1.1.1/assertion.json",
+      "assertion_id": "assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC",
+      "subject": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
+      "subject_type": "agent",
+      "level": "L2_DOMAIN_VERIFIED",
+      "claim": {
+        "type": "domain_control",
+        "domain": "acmemedical.com"
+      },
+      "authority": "agenid:authority:node-01",
+      "evidence": {
+        "type": "dns_txt_challenge",
+        "reference": "_agenid-challenge.acmemedical.com"
+      },
+      "verified_at": "2026-09-13T06:00:00Z",
+      "expires_at": "2026-10-13T06:00:00Z",
+      "scope": "domain_control_only",
+      "manifest_digest": {
+        "alg": "sha-256",
+        "value": "81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"
+      },
+      "key_id": "agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB",
+      "signature": "gKDnej0d8_xo-1uC0OvrJjlLX6roVKIQls0oPS4YAoYri_FdK2RJJ7wC3ZebXw_oJSZfulk8btXTmVxV-HEjDg"
+    }
+  },
+  "positive": {
+    "manifest_proof_verifies_with_operator_key": true,
+    "assertion_verifies_with_authority_key": true,
+    "signing_input_rederivable_from_signed_object": true
+  },
+  "negative": {
+    "assertion_level_tampered_rejected": true,
+    "assertion_verified_with_operator_key_rejected": true,
+    "manifest_proof_verified_with_authority_key_rejected": true,
+    "manifest_digest_mismatch_detected": true,
+    "including_signature_field_in_signing_input_rejected": true,
+    "key_order_independence_holds": true
+  },
+  "adversarial_canonicalization": {
+    "numbers": {
+      "input": {
+        "a": 1,
+        "b": 1.0,
+        "c": 1e+21,
+        "d": 1e-06,
+        "e": 1e-07,
+        "f": -0.0,
+        "g": 9007199254740991,
+        "h": 1.5,
+        "i": 100,
+        "j": 1e+100
+      },
+      "canonical_utf8": "{\"a\":1,\"b\":1,\"c\":1e+21,\"d\":0.000001,\"e\":1e-7,\"f\":0,\"g\":9007199254740991,\"h\":1.5,\"i\":100,\"j\":1e+100}",
+      "sha256": "c90806482c2f6ca448cf6b4334edd43373d8aa7f2352e626e8a006ecea660d27"
+    },
+    "unicode": {
+      "input": {
+        "emoji": "🔐",
+        "cjk": "検証",
+        "combining": "é",
+        "control": "line\nbreak\ttab",
+        "quote": "say \"hi\"",
+        "slash": "a/b\\c",
+        "del": "",
+        "nbsp": " "
+      },
+      "canonical_utf8": "{\"cjk\":\"検証\",\"combining\":\"é\",\"control\":\"line\\nbreak\\ttab\",\"del\":\"\",\"emoji\":\"🔐\",\"nbsp\":\" \",\"quote\":\"say \\\"hi\\\"\",\"slash\":\"a/b\\\\c\"}",
+      "canonical_hex": "7b22636a6b223a22e6a49ce8a8bc222c22636f6d62696e696e67223a2265cc81222c22636f6e74726f6c223a226c696e655c6e627265616b5c74746162222c2264656c223a227f222c22656d6f6a69223a22f09f9490222c226e627370223a22c2a0222c2271756f7465223a22736179205c2268695c22222c22736c617368223a22612f625c5c63227d",
+      "sha256": "df23e8ef35dc7c3934311edbcdd7d31b8248f6488fac982dcc9df86e1f691995"
+    },
+    "sort_order": {
+      "input": {
+        "b": 1,
+        "a": 2,
+        "aa": 3,
+        "B": 4,
+        "é": 5,
+        "ab": 6,
+        "10": 7,
+        "9": 8
+      },
+      "canonical_utf8": "{\"10\":7,\"9\":8,\"B\":4,\"a\":2,\"aa\":3,\"ab\":6,\"b\":1,\"é\":5}",
+      "canonical_hex": "7b223130223a372c2239223a382c2242223a342c2261223a322c226161223a332c226162223a362c2262223a312c22c3a9223a357d",
+      "sha256": "72eda6bc50ecb8b507940d26a19f6507ef284d99fa246c2275fabc8e8a7409b5"
+    },
+    "empty_and_null": {
+      "input": {
+        "z": null,
+        "empty_obj": {},
+        "empty_arr": [],
+        "nested": {
+          "k": [
+            null,
+            true,
+            false,
+            ""
+          ]
+        }
+      },
+      "canonical_utf8": "{\"empty_arr\":[],\"empty_obj\":{},\"nested\":{\"k\":[null,true,false,\"\"]},\"z\":null}",
+      "canonical_hex": "7b22656d7074795f617272223a5b5d2c22656d7074795f6f626a223a7b7d2c226e6573746564223a7b226b223a5b6e756c6c2c747275652c66616c73652c22225d7d2c227a223a6e756c6c7d",
+      "sha256": "8715fe3470ad104b498353e84f3112e2bf729d4d2de1a55fcc60e91b33c3ed37"
+    }
+  },
+  "rejections": {
+    "description": "Inputs a conformant implementation MUST refuse at validation (Erratum E1: rule is on the canonical token)",
+    "cases": [
+      {
+        "input_json": "{\"x\": 9007199254740992}",
+        "reason": "integer literal > 2^53-1"
+      },
+      {
+        "input_json": "{\"x\": 9007199254740993}",
+        "reason": "integer literal > 2^53-1"
+      },
+      {
+        "input_json": "{\"x\": 100000000000000000000}",
+        "reason": "integer literal > 2^53-1"
+      },
+      {
+        "input": "NaN",
+        "reason": "non-finite"
+      },
+      {
+        "input": "Infinity",
+        "reason": "non-finite"
+      }
+    ]
+  },
+  "spec": "AgenID v1.1.1 Final Protocol Specification, §8 (Erratum E1 applied)"
+}

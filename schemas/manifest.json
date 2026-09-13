@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agenid.org/schemas/v1.1.1/manifest.json",
+  "title": "AgenID Manifest (v1.1.1 \u00a76.1)",
+  "description": "Operator self-declaration content. DECLARED only. Never signed directly; bound by SHA-256 digest of its RFC 8785 canonical form. Deliberately has NO $schema member \u2014 adding one changes the canonical bytes. No field is a JSON number (\u00a75).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_version",
+    "agent_id",
+    "identity",
+    "ownership",
+    "purpose",
+    "disclosure"
+  ],
+  "properties": {
+    "manifest_version": {
+      "const": "1.0"
+    },
+    "agent_id": {
+      "type": "string",
+      "pattern": "^agenid:[0-7][0-9A-HJKMNP-TV-Z]{25}$"
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "ownership": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operator",
+        "operator_domain"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "operator_domain": {
+          "type": "string",
+          "format": "hostname"
+        },
+        "contact": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    },
+    "purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "channels"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "channels": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "voice",
+              "sms",
+              "chat",
+              "email",
+              "api"
+            ]
+          }
+        }
+      }
+    },
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_ai",
+        "discloses_to_user",
+        "human_escalation"
+      ],
+      "properties": {
+        "is_ai": {
+          "type": "boolean"
+        },
+        "discloses_to_user": {
+          "type": "boolean"
+        },
+        "human_escalation": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
