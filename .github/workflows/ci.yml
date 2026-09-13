@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  vectors:
+    name: Reproduce §8 vectors & validate schemas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install rfc8785 cryptography jsonschema
+      - name: Regenerate vectors and diff against the published file
+        run: |
+          python3 vectors/generate_vectors.py > /tmp/regen.json
+          python3 - <<'EOF'
+          import json
+          a = json.load(open('/tmp/regen.json'))
+          b = json.load(open('vectors/v1.1.1-vectors.json'))
+          # Published file carries two extra members (numbers vector in accepted form, rejections list).
+          for k in ("operator_key","authority_key","manifest","manifest_proof","verification_assertion","positive","negative"):
+              assert a[k] == b[k], f"vector drift in {k}"
+          for k in ("unicode","sort_order","empty_and_null"):
+              assert a["adversarial_canonicalization"][k] == b["adversarial_canonicalization"][k], f"drift in adversarial {k}"
+          print("vectors reproduce byte-for-byte")
+          EOF
+      - name: Validate vectors against the JSON Schemas (positives must pass, negatives must fail)
+        run: |
+          python3 - <<'EOF'
+          import json
+          from jsonschema import Draft202012Validator, FormatChecker
+          V = json.load(open('vectors/v1.1.1-vectors.json'))
+          def ok(schema, inst):
+              return not list(Draft202012Validator(json.load(open(schema)), format_checker=FormatChecker()).iter_errors(inst))
+          assert ok('schemas/manifest.json', V['manifest']['input'])
+          assert ok('schemas/manifest-proof.json', V['manifest_proof']['signed_object'])
+          assert ok('schemas/assertion.json', V['verification_assertion']['signed_object'])
+          bad = dict(V['verification_assertion']['signed_object']); bad['level'] = 'L3_ORGANIZATION_VERIFIED'
+          assert not ok('schemas/assertion.json', bad), "L3 with domain_control claim must be rejected"
+          bad = dict(V['verification_assertion']['signed_object']); bad['level'] = 'L5_CONTINUOUSLY_MONITORED'
+          assert not ok('schemas/assertion.json', bad), "L5 must not be issuable"
+          bad = dict(V['manifest']['input']); bad['permissions'] = []
+          assert not ok('schemas/manifest.json', bad), "reserved key must be rejected"
+          bad = dict(V['manifest_proof']['signed_object']); bad['key_id'] += '#z1'
+          assert not ok('schemas/manifest-proof.json', bad), "fragment in key_id must be rejected"
+          for s in ("manifest","manifest-proof","assertion","keys","authorities"):
+              Draft202012Validator.check_schema(json.load(open(f'schemas/{s}.json')))
+          print("schemas valid; positives pass; negatives rejected")
+          EOF
