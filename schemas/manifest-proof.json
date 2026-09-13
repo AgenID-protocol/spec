@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+  "$id": "https://agenid.com/schemas/v1.1.1/manifest-proof.json",
   "title": "AgenID ManifestProof (v1.1.1 \u00a76.2)",
   "description": "Operator-signed binding of agent_id to a manifest digest. Signing input = RFC 8785 canonical bytes of this object with the `signature` member removed; the `$schema` member IS part of the signing input. Pure Ed25519 (RFC 8032), no pre-hash. Cross-field rules not expressible here: expires_at > created_at; key_id must resolve to a key document with role=operator and controller == agent_id.",
   "type": "object",
@@ -18,7 +18,7 @@
   ],
   "properties": {
     "$schema": {
-      "const": "https://agenid.org/schemas/v1.1.1/manifest-proof.json"
+      "const": "https://agenid.com/schemas/v1.1.1/manifest-proof.json"
     },
     "proof_type": {
       "const": "manifest_self_declaration"

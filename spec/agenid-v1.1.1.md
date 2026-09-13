@@ -40,7 +40,7 @@ BUILD AUTHORIZATION:    NOT GRANTED — see §21 Build-Ready Matrix and §22 res
 
 A verifier MUST reject a `ManifestProof` signed by an `authority`-role key and MUST reject a `VerificationAssertion` signed by an `operator`-role key, even if the Ed25519 math validates (§7.3 step 6, vectors §8.6). The `VerificationAssertion` schema required by the directive is adopted verbatim in §6.3 with two additions the directive's own model needs to be cryptographically closed: `key_id` (which authority key signed it) and `manifest_digest` (which manifest version the assertion is bound to).
 
-**Domain note flagged for owner decision:** the directive's required schema uses `https://agenid.org/schemas/...` while the product domain is `agenid.com`. This document follows the directive's value verbatim (`agenid.org` as the open-standard namespace) and flags the split as a decision to confirm (§22 item 1) — it is a sensible open-spec/commercial split, but it must be deliberate, not inherited.
+**Domain decision (Erratum E2, 2026-09-13):** the open-standard schema/authority namespace and the product domain are unified on `https://agenid.com/schemas/...` — no `.org`/`.com` split. Owner decision, resolved; see `docs/errata.md`.
 
 ---
 
@@ -153,7 +153,7 @@ The `Manifest` itself is **never signed directly**. It is bound by digest from t
 
 ```json
 {
-  "$schema": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+  "$schema": "https://agenid.com/schemas/v1.1.1/manifest-proof.json",
   "proof_type": "manifest_self_declaration",
   "agent_id": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
   "manifest_version": "1.0",
@@ -170,7 +170,7 @@ Rules: `key_id` MUST resolve to a key document with `role: "operator"` and `cont
 
 ```json
 {
-  "$schema": "https://agenid.org/schemas/v1.1.1/assertion.json",
+  "$schema": "https://agenid.com/schemas/v1.1.1/assertion.json",
   "assertion_id": "assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC",
   "subject": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
   "subject_type": "agent",
@@ -290,7 +290,7 @@ manifest_digest (sha-256) = 81ba268016595373a12091598403eb1d099b214faed04fdabb5b
 Payload P (before signature):
 ```json
 {
-  "$schema": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+  "$schema": "https://agenid.com/schemas/v1.1.1/manifest-proof.json",
   "proof_type": "manifest_self_declaration",
   "agent_id": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
   "manifest_version": "1.0",
@@ -302,7 +302,7 @@ Payload P (before signature):
 ```
 `signing_input` = RFC 8785 canonical UTF-8 of P — **these exact bytes go to Ed25519:**
 ```
-{"$schema":"https://agenid.org/schemas/v1.1.1/manifest-proof.json","agent_id":"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y","created_at":"2026-09-13T00:00:00Z","expires_at":"2026-12-12T00:00:00Z","key_id":"agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE","manifest_digest":{"alg":"sha-256","value":"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"},"manifest_version":"1.0","proof_type":"manifest_self_declaration"}
+{"$schema":"https://agenid.com/schemas/v1.1.1/manifest-proof.json","agent_id":"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y","created_at":"2026-09-13T00:00:00Z","expires_at":"2026-12-12T00:00:00Z","key_id":"agenid:key:01J8Z3M9Q4XK2P7VBN6TDR8HWE","manifest_digest":{"alg":"sha-256","value":"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"},"manifest_version":"1.0","proof_type":"manifest_self_declaration"}
 ```
 Signature (Ed25519, operator private key), hex:
 ```
@@ -318,7 +318,7 @@ base64url (as carried in the `signature` member):
 Payload P (before signature) — the directive's schema plus `manifest_digest` and `key_id`:
 ```json
 {
-  "$schema": "https://agenid.org/schemas/v1.1.1/assertion.json",
+  "$schema": "https://agenid.com/schemas/v1.1.1/assertion.json",
   "assertion_id": "assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC",
   "subject": "agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y",
   "subject_type": "agent",
@@ -335,7 +335,7 @@ Payload P (before signature) — the directive's schema plus `manifest_digest` a
 ```
 `signing_input` (RFC 8785 canonical UTF-8 — exact Ed25519 message):
 ```
-{"$schema":"https://agenid.org/schemas/v1.1.1/assertion.json","assertion_id":"assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC","authority":"agenid:authority:node-01","claim":{"domain":"acmemedical.com","type":"domain_control"},"evidence":{"reference":"_agenid-challenge.acmemedical.com","type":"dns_txt_challenge"},"expires_at":"2026-10-13T06:00:00Z","key_id":"agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB","level":"L2_DOMAIN_VERIFIED","manifest_digest":{"alg":"sha-256","value":"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"},"scope":"domain_control_only","subject":"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y","subject_type":"agent","verified_at":"2026-09-13T06:00:00Z"}
+{"$schema":"https://agenid.com/schemas/v1.1.1/assertion.json","assertion_id":"assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC","authority":"agenid:authority:node-01","claim":{"domain":"acmemedical.com","type":"domain_control"},"evidence":{"reference":"_agenid-challenge.acmemedical.com","type":"dns_txt_challenge"},"expires_at":"2026-10-13T06:00:00Z","key_id":"agenid:key:01J8Z3NC5R7YT3W9KM2XQ4VJHB","level":"L2_DOMAIN_VERIFIED","manifest_digest":{"alg":"sha-256","value":"81ba268016595373a12091598403eb1d099b214faed04fdabb5bdb47b473ab5d"},"scope":"domain_control_only","subject":"agenid:01J8Z3K3F2QZ9X6V7R4T8N2W5Y","subject_type":"agent","verified_at":"2026-09-13T06:00:00Z"}
 ```
 Signature (Ed25519, authority private key), hex:
 ```
@@ -415,7 +415,7 @@ Note on the unicode row: the DEL (`0x7f`) and NBSP (`0xc2a0`) bytes are present 
 `https://<ownership.operator_domain>/.well-known/agenid/keys.json`:
 ```json
 {
-  "$schema": "https://agenid.org/schemas/v1.1.1/keys.json",
+  "$schema": "https://agenid.com/schemas/v1.1.1/keys.json",
   "controller_domain": "acmemedical.com",
   "keys": [ { ...key document... }, { ...key document... } ]
 }
@@ -428,8 +428,8 @@ Served over HTTPS with a valid certificate for `operator_domain`. This document 
 ### 9.5 Trust anchors — bootstrap now specified (closes hardening-draft BLOCKED item)
 A verifier needs two things it cannot derive from a signature: (1) which domain an `agenid:authority:*` identifier maps to, and (2) an initial reason to trust that domain's well-known key file.
 
-- **Authority registry document:** `https://agenid.org/.well-known/agenid/authorities.json` lists `{ authority_id, authority_domain, root_key_id, root_public_key_b64u }` for every recognized authority. This file is itself signed (as a `VerificationAssertion` with `claim.type: "authority_registry"`, reserved value) by the **AgenID root authority key**.
-- **Root key pinning (out-of-band anchor):** the AgenID root authority key's public value and `key_id` are published in this specification's repository (the spec is the out-of-band channel) and MUST be pinned by verifiers. TLS on `agenid.org` is the *online* path; the pinned root key is the *offline* anchor. A verifier that trusts only TLS is doing "trust AgenID's infrastructure"; a verifier that also checks the pin is doing independent verification. Both paths are normative; disagreement is `trust_anchor_mismatch` (hard fail).
+- **Authority registry document:** `https://agenid.com/.well-known/agenid/authorities.json` lists `{ authority_id, authority_domain, root_key_id, root_public_key_b64u }` for every recognized authority. This file is itself signed (as a `VerificationAssertion` with `claim.type: "authority_registry"`, reserved value) by the **AgenID root authority key**.
+- **Root key pinning (out-of-band anchor):** the AgenID root authority key's public value and `key_id` are published in this specification's repository (the spec is the out-of-band channel) and MUST be pinned by verifiers. TLS on `agenid.com` is the *online* path; the pinned root key is the *offline* anchor. A verifier that trusts only TLS is doing "trust AgenID's infrastructure"; a verifier that also checks the pin is doing independent verification. Both paths are normative; disagreement is `trust_anchor_mismatch` (hard fail).
 - **What is and isn't done:** the *mechanism* is now fully specified and testable (an `authorities.json` + pinned root key can be verified with the exact §7.2 procedure). The *production root key* does not exist yet — generating it, storing it in an HSM, and publishing the pin is an operational ceremony recorded in §22 as a pre-launch task, not a protocol gap. §21 scores Gate 4 accordingly.
 
 ### 9.6 Rotation / revocation / expiry
@@ -490,7 +490,7 @@ Generic contract as in the hardening draft. Retell: AgenID-side interface normat
 Cryptography: valid signature ✓ (×2 objects), tampered payload ✓, wrong key ✓, wrong *role* ✓ (×2), digest mismatch ✓, signature-in-input error ✓, key-order independence ✓, canonicalization adversarial cases ✓ (numbers, unicode, sort order, null/empty), number-domain rejections ✓. Still pending implementation: expired proof, revoked/retired key timing, ULID collision insert, resolver content negotiation, L2/L3/L4 flows, status transitions, adapter fuzzing.
 
 ## 20. Normative Schemas — locations
-`https://agenid.org/schemas/v1.1.1/manifest.json`, `.../manifest-proof.json`, `.../assertion.json`, `.../keys.json`, `.../authorities.json`. The `manifest.json` schema is the hardening draft's §9 verbatim; `manifest-proof.json` and `assertion.json` are the structures in §6.2/§6.3 with the enumerations in §6.3 and `additionalProperties: false`. (Schema documents are specification artifacts, not application code, and are the next spec deliverable if the owner wants them as standalone files.)
+`https://agenid.com/schemas/v1.1.1/manifest.json`, `.../manifest-proof.json`, `.../assertion.json`, `.../keys.json`, `.../authorities.json`. The `manifest.json` schema is the hardening draft's §9 verbatim; `manifest-proof.json` and `assertion.json` are the structures in §6.2/§6.3 with the enumerations in §6.3 and `additionalProperties: false`. (Schema documents are specification artifacts, not application code, and are the next spec deliverable if the owner wants them as standalone files.)
 
 ---
 
@@ -510,7 +510,7 @@ Cryptography: valid signature ✓ (×2 objects), tampered payload ✓, wrong key
 
 ## 22. Residual Items (post-closure)
 
-1. **`agenid.org` vs `agenid.com` namespace split** — confirm the directive's `agenid.org` schema/authority namespace is intentional (open standard on .org, product on .com). Followed verbatim here; needs an explicit yes.
+1. ~~`agenid.org` vs `agenid.com` namespace split~~ — **RESOLVED (Erratum E2, 2026-09-13):** owner decided unified `agenid.com` namespace, no split. Schemas, vectors, and this document updated.
 2. **Root authority key ceremony** — generate the production root key (HSM), publish `authorities.json`, publish the pin in the spec repo. Operational, pre-launch, not a spec gap.
 3. **Retell-side adapter field verification** — unchanged; do not implement against unverified Retell API shapes.
 4. **L4 deployment-evidence methodology** — sampling method/size/pass criteria for `deployment_sample_review` still to be specified before L4 can be *issued*; the assertion format for L4 is already closed.

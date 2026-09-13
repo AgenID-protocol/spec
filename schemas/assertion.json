@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agenid.org/schemas/v1.1.1/assertion.json",
+  "$id": "https://agenid.com/schemas/v1.1.1/assertion.json",
   "title": "AgenID VerificationAssertion (v1.1.1 \u00a76.3)",
   "description": "Authority-signed attestation over one claim, one evidence pointer, one level, one scope, one validity window, bound to one manifest version by digest. Same signing construction as ManifestProof. L5_CONTINUOUSLY_MONITORED is intentionally absent from `level` \u2014 it is a reserved name and MUST NOT be issued in v1.1.1. Cross-field rules: subject matches subject_type (agenid:<ULID> for agent, dep_* for deployment); subject_type=deployment iff level=L4_DEPLOYMENT_VERIFIED; claim.type corresponds to level (L1\u2192registration, L2\u2192domain_control, L3\u2192organization_identity, L4\u2192deployment_conformance); expires_at > verified_at; key_id resolves to role=authority with controller == authority. evidence.reference is a POINTER, never content.",
   "type": "object",
@@ -23,7 +23,7 @@
   ],
   "properties": {
     "$schema": {
-      "const": "https://agenid.org/schemas/v1.1.1/assertion.json"
+      "const": "https://agenid.com/schemas/v1.1.1/assertion.json"
     },
     "assertion_id": {
       "type": "string",

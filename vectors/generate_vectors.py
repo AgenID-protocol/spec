@@ -38,7 +38,7 @@ manifest_digest = hashlib.sha256(manifest_bytes).hexdigest()
 
 # ---------- 2. ManifestProof (signed by OPERATOR key) ----------
 manifest_proof_payload = {
-    "$schema": "https://agenid.org/schemas/v1.1.1/manifest-proof.json",
+    "$schema": "https://agenid.com/schemas/v1.1.1/manifest-proof.json",
     "proof_type": "manifest_self_declaration",
     "agent_id": AGENT_ID,
     "manifest_version": "1.0",
@@ -53,7 +53,7 @@ manifest_proof = dict(manifest_proof_payload); manifest_proof["signature"] = b64
 
 # ---------- 3. VerificationAssertion (signed by AUTHORITY key) ----------
 assertion_payload = {
-    "$schema": "https://agenid.org/schemas/v1.1.1/assertion.json",
+    "$schema": "https://agenid.com/schemas/v1.1.1/assertion.json",
     "assertion_id": "assertion:01J8Z3P2K8VW4RN7XTQ6MYD5HC",
     "subject": AGENT_ID,
     "subject_type": "agent",

@@ -18,7 +18,7 @@ This repository is the standard. The reference implementation is [`AgenID-protoc
 | Path | What |
 |---|---|
 | [`spec/agenid-v1.1.1.md`](spec/agenid-v1.1.1.md) | **AgenID v1.1.1 Final Protocol Specification** — normative |
-| [`schemas/`](schemas/) | JSON Schema (draft 2020-12) for every normative object — `manifest`, `manifest-proof`, `assertion`, `keys`, `authorities`. Canonical `$id`: `https://agenid.org/schemas/v1.1.1/<name>.json` |
+| [`schemas/`](schemas/) | JSON Schema (draft 2020-12) for every normative object — `manifest`, `manifest-proof`, `assertion`, `keys`, `authorities`. Canonical `$id`: `https://agenid.com/schemas/v1.1.1/<name>.json` |
 | [`vectors/`](vectors/) | Deterministic test vectors (§8): real Ed25519 signatures and RFC 8785 canonical bytes, plus the generator that produced them |
 | [`docs/errata.md`](docs/errata.md) | Corrections applied after publication |
 

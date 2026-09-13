@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://agenid.org/schemas/v1.1.1/keys.json",
+  "$id": "https://agenid.com/schemas/v1.1.1/keys.json",
   "title": "AgenID keys.json (v1.1.1 \u00a79.1, \u00a79.3, \u00a79.4)",
   "description": "Discovery document served at https://<controller_domain>/.well-known/agenid/keys.json (operator or authority). Retired/revoked keys remain listed forever so historical proofs stay verifiable. Verifiers require this document and the AgenID-hosted key document (GET /v1/keys/{key-ULID}) to agree.",
   "type": "object",
@@ -12,7 +12,7 @@
   ],
   "properties": {
     "$schema": {
-      "const": "https://agenid.org/schemas/v1.1.1/keys.json"
+      "const": "https://agenid.com/schemas/v1.1.1/keys.json"
     },
     "controller_domain": {
       "type": "string",
