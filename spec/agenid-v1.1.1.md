@@ -306,11 +306,11 @@ Payload P (before signature):
 ```
 Signature (Ed25519, operator private key), hex:
 ```
-f1b9a81101db1d327d2ef0921b5682cd02013e8314e543c7592c1a85eda916c16253aa193e079e60eb383634e0ce588662d0e4e2796f4bfe39fb03095806260c
+82d5eddc2237e716621efd7a62c296589bae67c4d74de5d3cd6a2743b6eb699ecfdda0b8449271258d221886b1f3a48bc9b469de7c653f8163d169a4497ba405
 ```
 base64url (as carried in the `signature` member):
 ```
-8bmoEQHbHTJ9LvCSG1aCzQIBPoMU5UPHWSwahe2pFsFiU6oZPgeeYOs4NjTgzliGYtDk4nlvS_45-wMJWAYmDA
+gtXt3CI35xZiHv16YsKWWJuuZ8TXTeXTzWonQ7braZ7P3aC4RJJxJY0iGIax86SLybRp3nxlP4Fj0WmkSXukBQ
 ```
 
 ### 8.4 `VerificationAssertion` — signing input and signature (Authority key)
@@ -339,11 +339,11 @@ Payload P (before signature) — the directive's schema plus `manifest_digest` a
 ```
 Signature (Ed25519, authority private key), hex:
 ```
-80a0e77a3d1df3fc68fb5b82d0ebeb26394b5faae854a21096cd283d2e1802862b8bf15d2b644927bc02dd979b5f0fe825265fba593c6ed5d3995c55f871230e
+fa3ed4aac8de0200be8e31b1e56d0a6783c6c4c1e298bf297b25522aa1b8f369c0f64809c9c5c82777ffa9dd25d724a1078b8e179aff8a55af6d33e73fd6530b
 ```
 base64url:
 ```
-gKDnej0d8_xo-1uC0OvrJjlLX6roVKIQls0oPS4YAoYri_FdK2RJJ7wC3ZebXw_oJSZfulk8btXTmVxV-HEjDg
+-j7UqsjeAgC-jjGx5W0KZ4PGxMHimL8peyVSKqG482nA9kgJycXIJ3f_qd0l1yShB4uOF5r_ilWvbTPnP9ZTCw
 ```
 
 ### 8.5 Positive results (executed)

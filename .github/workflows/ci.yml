@@ -29,6 +29,21 @@ jobs:
               assert a["adversarial_canonicalization"][k] == b["adversarial_canonicalization"][k], f"drift in adversarial {k}"
           print("vectors reproduce byte-for-byte")
           EOF
+      - name: Prose §8 matches the vectors file (signing inputs and signatures)
+        run: |
+          python3 - <<'EOF'
+          import json, re
+          V = json.load(open('vectors/v1.1.1-vectors.json'))
+          md = open('spec/agenid-v1.1.1.md', encoding='utf-8').read()
+          sec = md[md.index('## 8. Deterministic Test Vectors'):md.index('### 8.5')]
+          for k in ("manifest_proof", "verification_assertion"):
+              for f in ("signing_input_utf8", "signature_hex", "signature_b64u"):
+                  assert V[k][f] in sec, f"§8 prose drifted from vectors file: {k}.{f}"
+          printed = set(re.findall(r'\b[0-9a-f]{128}\b', sec))
+          expected = {V[k]["signature_hex"] for k in ("manifest_proof", "verification_assertion")}
+          assert printed == expected, f"unexpected signature(s) printed in §8: {printed - expected}"
+          print("§8 prose matches the vectors file")
+          EOF
       - name: Validate vectors against the JSON Schemas (positives must pass, negatives must fail)
         run: |
           python3 - <<'EOF'
